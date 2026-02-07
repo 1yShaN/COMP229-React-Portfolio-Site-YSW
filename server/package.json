@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend code example for COMP229.W002",
+  "keywords": [
+    "COMP229",
+    "Express",
+    "MERN",
+    "Centennial"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JViniX/COMP229.W002-CodeExamples/server"
+  },
+  "license": "MIT",
+  "author": "Julio Vinicius",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "http-errors": "^2.0.1",
+    "morgan": "^1.10.1"
+  }
+}
