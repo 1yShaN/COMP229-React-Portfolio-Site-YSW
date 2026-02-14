@@ -1,15 +1,18 @@
-const createError = require('http-errors');
-const express = require('express');
-const logger = require('morgan');
-const cors = require('cors');
 
-const app = express();
+let configDB = require('./config/mongodb');
+let app = require('./config/express');
+let http = require('http');
 
-app.use(cors());
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+configDB().catch(console.dir);
+var server = http.createServer(app);
+
+server.on('listening', onListening);
+server.listen(3000);
+
+function onListening() {
+    console.log('Server running at http://localhost:3000/');
+}
 
 function helloWorld(req, res, next){
     res.setHeader('Content-Type', 'text/plain');
@@ -44,3 +47,4 @@ app.use(notfound);
 app.listen(3000, ()=>{
     console.log('Server running at http://localhost:3000/');
 })
+

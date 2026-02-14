@@ -19,7 +19,7 @@ const About = () => {
                     <img src={MyLogo} alt="Logo" id="watermark" height="100px" width="120px"></img>
                </div>
           </>
-     );
+     );  
 }
 
 export default About;
