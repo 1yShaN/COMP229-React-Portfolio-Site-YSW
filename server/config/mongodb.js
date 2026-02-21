@@ -10,10 +10,11 @@ module.exports = async function() {
     await mongoose.connect(uri, clientOptions);
     await mongoose.connection.db.admin().command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    
   } catch (error) {
-    console.log("Error connecting to MongoDB:", error);
+    console.error("Error connecting to MongoDB:", error);
 
-    // Ensures that the client will close when you finish/error
+    // Ensures that the client will close when error happens.
     await mongoose.disconnect();
   }
 }

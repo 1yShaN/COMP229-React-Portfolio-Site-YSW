@@ -3,7 +3,6 @@ let configDB = require('./config/mongodb');
 let app = require('./config/express');
 let http = require('http');
 
-
 configDB().catch(console.dir);
 var server = http.createServer(app);
 
