@@ -182,85 +182,394 @@ body {
 /* ------------------------
    PROJECT PAGE
 ------------------------- */
-
-/* Page Title */
 h2 {
     text-align: center;
-    padding-top: 120px; /* below navbar */
+    padding-top: 120px;
     font-size: 2.2rem;
     color: #333;
 }
 
-/* Container for all project rows */
-.project-container {
+.projectsBox {
+    padding: 0 20px 20px;
     display: flex;
-    flex-direction: column;
-    gap: 50px; /* spacing between projects */
-    max-width: 1000px;
-    margin: 40px auto; /* center horizontally */
-    padding: 0 20px;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
 }
 
-/* Individual Project Row */
-.row {
+/* CRUD Form */
+.project-form {
+    max-width: 800px;
+    margin: 20px auto;
     display: flex;
-    margin: 30px;
-    flex-wrap: wrap; /* for smaller screens */
-    gap: 30px;
-    align-items: center;
+    flex-direction: column;
+    gap: 15px;
     background-color: #fcf9f6;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+.project-form input[type="text"],
+.project-form input[type="file"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.project-form button {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #efc0c0;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-form button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* Individual Project Card */
+.projectCard {
+    background-color: #fcf9f6;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.projectsBox{
-    padding: 0px 20px 20px 20px;
-}
-
-.row:hover {
+.projectCard:hover {
     transform: translateY(-5px);
     box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
 }
 
-/* Project Image */
-.row img {
-    width: 400px;
-    height: 300px;
+.projectImage {
+    width: 100%;
+    height: 200px;
     border-radius: 10px;
-    flex-shrink: 0;
     object-fit: cover;
+    margin-bottom: 10px;
 }
 
-/* Project Text Content */
-.text-content {
-    flex: 1;
-    min-width: 250px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #555;
-}
-
-.text-content a {
-    color: #efc0c0;
-    text-decoration: none;
-}
-
-.text-content a:hover {
-    color: #d18181;    
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-/* Project Title */
-.text-content h3 {
-    font-size: 1.5rem;
+.projectCard h3 {
     color: #efc0c0;
     margin-bottom: 10px;
 }
 
-.servicesBox{
-    padding: 0px 20px 20px 20px;
+.projectCard p {
+    color: #555;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.projectActions {
+    display: flex;
+    gap: 10px;
+}
+
+.projectActions button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #efc0c0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.projectActions button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   SERVICES SECTION (CRUD)
+------------------------- */
+
+/* Container */
+.servicesBox {
+    padding: 0 20px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* Reuse project card style but keep consistent naming */
+.serviceCard {
+    background-color: #fcf9f6;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.serviceCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Image */
+.serviceImage {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Title */
+.serviceCard h3 {
+    color: #efc0c0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Text */
+.serviceCard p {
+    color: #555;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Buttons */
+.serviceActions {
+    display: flex;
+    gap: 10px;
+}
+
+.serviceActions button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #efc0c0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.serviceActions button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   FORM (shared with projects)
+------------------------- */
+
+.project-form {
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #fcf9f6;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+.project-form input[type="text"],
+.project-form input[type="file"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.project-form button {
+    width: 160px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #efc0c0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-form button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   USER SECTION
+------------------------- */
+
+.userBox {
+    padding: 0 20px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* User Card */
+.userCard {
+    background-color: #fcf9f6;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 280px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.userCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
+}
+
+/* User Name */
+.userCard h3 {
+    color: #efc0c0;
+    margin-bottom: 10px;
+}
+
+/* Email */
+.userCard p {
+    color: #555;
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+/* Role badge */
+.userRole {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #efc0c0;
+    color: white;
+    font-size: 0.85rem;
+}
+
+/* Buttons */
+.userActions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.userActions button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #efc0c0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.userActions button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   PROJECT TABLE (CRUD)
+------------------------- */
+.projectTable {
+    max-width: 900px;
+    margin: 20px auto 50px;
+    width: 95%;
+    border-collapse: collapse;
+    background-color: #fcf9f6;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+.projectTable th,
+.projectTable td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.projectTable th {
+    background-color: #efc0c0;
+    color: white;
+    font-size: 1rem;
+}
+
+.projectTable tr:nth-child(even) {
+    background-color: #fff7f7;
+}
+
+.projectTable input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+}
+
+.projectTable button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #efc0c0;
+    color: white;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.projectTable button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   RESPONSIVE
+------------------------- */
+
+@media (max-width: 768px) {
+    .userBox {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .userCard {
+        width: 90%;
+    }
+
+    .project-form {
+        width: 90%;
+    }
+}
+
+/* ------------------------
+   RESPONSIVE (important)
+------------------------- */
+
+@media (max-width: 768px) {
+    .servicesBox {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .serviceCard {
+        width: 90%;
+    }
+
+    .project-form {
+        width: 90%;
+    }
 }
 
 /* ------------------------

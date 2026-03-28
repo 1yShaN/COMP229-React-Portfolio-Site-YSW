@@ -10,6 +10,7 @@ let projectsRouter = require('../app/routers/projects');
 let referencesRouter = require('../app/routers/references');
 let servicesRouter = require('../app/routers/services');
 let usersRouter = require('../app/routers/users');
+let contactRouter = require('../app/routers/contact');
 
 app.use(cors());
 
@@ -22,6 +23,7 @@ app.use('/api/projects', projectsRouter);
 app.use('/api/references', referencesRouter);
 app.use('/api/services', servicesRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/contact', contactRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

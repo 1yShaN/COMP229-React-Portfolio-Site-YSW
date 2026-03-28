@@ -12,6 +12,7 @@ let projectsModel = mongoose.Schema(
 );
 
 // Ensure virtual fields are serialised.
+
 projectsModel.set('toJSON', {
     virtuals: true,
     versionKey: false,

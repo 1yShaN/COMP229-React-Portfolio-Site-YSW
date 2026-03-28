@@ -1,13 +1,13 @@
-let ProjectsModel = require('../models/projects');
+let contactsModel = require('../models/contact');
 
-// Add a new project
+// Add new contact
 module.exports.processAdd = async function (req, res, next) {
     try {
-        const newProject = await ProjectsModel.create(req.body);
+        const newContact = await contactsModel.create(req.body);
         res.status(200).json({
             success: true,
-            message: "Project added successfully.",
-            data: newProject
+            message: "Contact added successfully.",
+            data: newContact
         });
     } catch (error) {
         console.log(error);
@@ -15,13 +15,13 @@ module.exports.processAdd = async function (req, res, next) {
     }
 };
 
-// List all projects
+// List contacts
 module.exports.list = async function (req, res, next) {
     try {
-        const list = await ProjectsModel.find({});
+        const list = await contactsModel.find({});
         res.json({
             success: true,
-            message: "Projects list retrieved successfully.",
+            message: "Contacts list retrieved successfully.",
             data: list
         });
     } catch (error) {
@@ -30,15 +30,15 @@ module.exports.list = async function (req, res, next) {
     }
 };
 
-// Get a project by ID
+// Get contact by ID
 module.exports.getById = async function (req, res, next) {
     try {
-        const project = await ProjectsModel.findById(req.params.id);
-        if (!project) throw new Error('Project not found.');
+        const contact = await contactsModel.findById(req.params.id);
+        if (!contact) throw new Error('Contact not found.');
         res.json({
             success: true,
-            message: "Project retrieved successfully.",
-            data: project
+            message: "Contact retrieved successfully.",
+            data: contact
         });
     } catch (error) {
         console.log(error);
@@ -46,26 +46,26 @@ module.exports.getById = async function (req, res, next) {
     }
 };
 
-// Update a project
+// Update contact (FIX)
 module.exports.processEdit = async function (req, res, next) {
     try {
-        const updatedProject = await ProjectsModel.findByIdAndUpdate(
+        const updatedContact = await contactsModel.findByIdAndUpdate(
             req.params.id,
             { $set: req.body }, // ✅ Only update the fields provided
-            { new: true }       // ✅ Return the updated project
+            { new: true }       // ✅ Return the updated contact
         );
 
-        if (!updatedProject) {
+        if (!updatedContact) {
             return res.status(404).json({
                 success: false,
-                message: "Project not found"
+                message: "Contact not found"
             });
         }
 
         res.json({
             success: true,
-            message: "Project updated successfully",
-            data: updatedProject
+            message: "Contact updated successfully",
+            data: updatedContact
         });
 
     } catch (error) {
@@ -74,18 +74,18 @@ module.exports.processEdit = async function (req, res, next) {
     }
 };
 
-// Delete a project
+// Delete contact
 module.exports.performDelete = async function (req, res, next) {
     try {
-        const result = await ProjectsModel.deleteOne({ _id: req.params.id });
+        const result = await contactsModel.deleteOne({ _id: req.params.id });
 
         if (result.deletedCount > 0) {
             res.json({
                 success: true,
-                message: "Project deleted successfully"
+                message: "Contact deleted successfully"
             });
         } else {
-            throw new Error('Project not deleted. ID may be incorrect.');
+            throw new Error('Contact not deleted. ID may be incorrect.');
         }
     } catch (error) {
         console.log(error);
