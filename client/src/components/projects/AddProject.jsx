@@ -1,54 +1,53 @@
 import { useState } from "react";
-import { create } from "../../datasource/api-projects";
 import { useNavigate } from "react-router-dom";
-import ProjectModel from "../../datasource/projectModel";
-import FormProject from "./FormProject";
+import { create } from "../../datasource/api-projects";
+import ProjectForm from "./ProjectForm";
 
-function AddProject() {
+const AddProject = () => {
     const navigate = useNavigate();
-    const [project, setProject] = useState(new ProjectModel());
-    const [errorMsg, setErrorMsg] = useState('')
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setProject((formData) => ({ ...formData, [name]: value }));
+    const [project, setProject] = useState({
+        title: "",
+        completion: "",
+        description: ""
+    });
+
+    // HANDLE INPUT
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setProject(prev => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log("Submitting:" + project);
+    // SUBMIT → SAVE TO MONGODB
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        create(project)
-            .then((res) => {
-                if (res.success) {
-                    alert(res.message + " - id: " + res.data.id);
-                    navigate("/projects/list");
-                }
-                else{
-                    alert(res.message);
-                }
-            })
-            .catch((err) => {
-                alert(err.message);
-                console.log(err);
-            })
-    }
+        const res = await create(project);
+
+        if (res && res.success) {
+            alert("Project added successfully!");
+
+            // redirect to list → will auto reload data
+            navigate("/projects/list");
+        } else {
+            alert(res?.message || "Failed to add project");
+        }
+    };
 
     return (
-        <div className="container" style={{ paddingTop: 80 }}>
-            <div className="row">
-                <div className="offset-md-3 col-md-6">
-                    <h1>Add Project Item</h1>
-                    <p className="flash"><span>{errorMsg}</span></p>
-                    <FormProject 
-                        project={project}
-                        handleChange={handleChange}
-                        handleSubmit={handleSubmit}
-                    />
-                </div>
-            </div>
+        <div className="page">
+            <h1>Add Project</h1>
+
+            <ProjectForm
+                project={project}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+            />
         </div>
-    )
-}
+    );
+};
 
 export default AddProject;

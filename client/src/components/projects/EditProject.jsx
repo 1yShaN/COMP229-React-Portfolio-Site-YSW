@@ -1,75 +1,55 @@
-import { useState, useEffect } from "react";
-import { update, getOne } from "../../datasource/api-projects";
-import { useNavigate, useParams } from "react-router-dom";
-import ProjectModel from "../../datasource/projectModel";
-import FormProject from "./FormProject";
 
-function EditProject() {
-    const navigate = useNavigate();
+
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { update, readOne } from "../../datasource/api-projects";
+import ProjectForm from "./ProjectForm";
+
+const EditProject = () => {
     const { id } = useParams();
-    const [project, setProject] = useState(new ProjectModel());
-    const [errorMsg, setErrorMsg] = useState('')
+    const navigate = useNavigate();
+
+    const [project, setProject] = useState({
+        title: "",
+        completion: "",
+        description: ""
+    });
 
     useEffect(() => {
-        getOne(id)
-            .then((res) => {
-                if (res.success) {
-                    setProject(new ProjectModel(
-                        res.data.id,
-                        res.data.title,
-                        res.data.completion,
-                        res.data.description));
-                }
-                else {
-                    alert(res.message);
-                }
-            })
-            .catch((err) => {
-                alert(err.message);
-                console.log(err);
-            })
-    }, [id, navigate]);
+        readOne(id).then(res => {
+            if (res && res.success) {
+                setProject(res.data);
+            }
+        });
+    }, [id]);
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setProject((formData) => ({ ...formData, [name]: value }));
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setProject(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log("Submitting:" + project);
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-        update(project, id)
-            .then((res) => {
-                if (res.success) {
-                    alert(res.message);
-                    navigate("/projects/list");
-                }
-                else {
-                    alert(res.message);
-                }
-            })
-            .catch((err) => {
-                alert(err.message);
-                console.log(err);
-            })
-    }
+        update(project, id).then(res => {
+            if (res && res.success) {
+                navigate("/projects/list");
+            } else {
+                alert(res?.message || "Update failed");
+            }
+        });
+    };
 
     return (
-        <div className="container" style={{ paddingTop: 80 }}>
-            <div className="row">
-                <div className="offset-md-3 col-md-6">
-                    <h1>Edit a Project Item</h1>
-                    <p className="flash"><span>{errorMsg}</span></p>
-                    <FormProject
-                        project={project}
-                        handleChange={handleChange}
-                        handleSubmit={handleSubmit}
-                    />
-                </div>
-            </div>
-        </div>
-    )
-}
+        <>
+            <h1>Edit Project</h1>
+            <ProjectForm
+                project={project}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+            />
+        </>
+    );
+};
 
 export default EditProject;

@@ -11,6 +11,57 @@ body {
     overflow-x: hidden; /* prevents horizontal scroll */
 }
 
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links li {
+    position: relative; /* IMPORTANT */
+}
+
+/* Dropdown hidden */
+.dropdown-menu {
+    display: none;
+    position: absolute;   /* ✅ makes it float */
+    top: 100%;            /* directly below parent */
+    left: 0;
+    background: white;
+    min-width: 160px;
+    padding: 10px 0;
+    list-style: none;
+
+    /* FIX layout */
+    display: none;
+    flex-direction: column; /* ✅ prevent horizontal */
+    z-index: 1000;
+
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Show on hover */
+.dropdown:hover .dropdown-menu {
+    display: flex; /* ✅ vertical dropdown */
+}
+
+/* Items */
+.dropdown-menu li {
+    padding: 8px 15px;
+    white-space: nowrap;
+}
+
+/* Links */
+.dropdown-menu li a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Hover effect */
+.dropdown-menu li:hover {
+    background-color: #f2f2f2;
+}
+
 /* ------------------------
    WATERMARK
 ------------------------- */
@@ -182,113 +233,81 @@ body {
 /* ------------------------
    PROJECT PAGE
 ------------------------- */
+
+/* Page Title */
 h2 {
     text-align: center;
-    padding-top: 120px;
+    padding-top: 120px; /* below navbar */
     font-size: 2.2rem;
     color: #333;
 }
 
-.projectsBox {
-    padding: 0 20px 20px;
+/* Container for all project rows */
+.project-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 50px; /* spacing between projects */
+    max-width: 1000px;
+    margin: 40px auto; /* center horizontally */
+    padding: 0 20px;
+}
+
+/* Individual Project Row */
+.row {
+    display: flex;
+    margin: 30px;
+    flex-wrap: wrap; /* for smaller screens */
     gap: 30px;
-    justify-content: center;
-}
-
-/* CRUD Form */
-.project-form {
-    max-width: 800px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    background-color: #fcf9f6;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-}
-
-.project-form input[type="text"],
-.project-form input[type="file"] {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-}
-
-.project-form button {
-    width: 150px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #efc0c0;
-    cursor: pointer;
-    align-self: flex-start;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.project-form button:hover {
-    background-color: #ed76a3;
-    transform: scale(1.05);
-}
-
-/* Individual Project Card */
-.projectCard {
-    background-color: #fcf9f6;
-    border-radius: 15px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-    padding: 20px;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    background-color: #fcf9f6;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.projectCard:hover {
+.projectsBox{
+    padding: 0px 20px 20px 20px;
+}
+
+.row:hover {
     transform: translateY(-5px);
     box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
 }
 
-.projectImage {
-    width: 100%;
-    height: 200px;
+/* Project Image */
+.row img {
+    width: 400px;
+    height: 300px;
     border-radius: 10px;
+    flex-shrink: 0;
     object-fit: cover;
-    margin-bottom: 10px;
 }
 
-.projectCard h3 {
+/* Project Text Content */
+.text-content {
+    flex: 1;
+    min-width: 250px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.text-content a {
+    color: #efc0c0;
+    text-decoration: none;
+}
+
+.text-content a:hover {
+    color: #d18181;    
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Project Title */
+.text-content h3 {
+    font-size: 1.5rem;
     color: #efc0c0;
     margin-bottom: 10px;
-}
-
-.projectCard p {
-    color: #555;
-    font-size: 1rem;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.projectActions {
-    display: flex;
-    gap: 10px;
-}
-
-.projectActions button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #efc0c0;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.projectActions button:hover {
-    background-color: #ed76a3;
-    transform: scale(1.05);
 }
 
 /* ------------------------
@@ -775,4 +794,123 @@ h2 {
 .service-form button:hover {
     background-color: #ed76a3;
     transform: scale(1.05);
+}
+
+/* ------------------------
+   PROJECT TABLE (UPDATED STYLE)
+------------------------- */
+
+.projectTable {
+    max-width: 1000px;
+    margin: 30px auto 50px;
+    width: 95%;
+    border-collapse: collapse;
+    background-color: #fcf9f6;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.projectTable th {
+    background-color: #efc0c0;
+    color: white;
+    padding: 14px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+/* Cells */
+.projectTable td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+/* Zebra */
+.projectTable tr:nth-child(even) {
+    background-color: #fff7f7;
+}
+
+/* Hover */
+.projectTable tr:hover {
+    background-color: #fceaea;
+    transition: 0.3s;
+}
+
+/* Inputs */
+.projectTable input,
+.projectTable textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+}
+
+/* Buttons */
+.projectTable button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #efc0c0;
+    color: white;
+    transition: 0.3s;
+}
+
+.projectTable button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* Add Button */
+.add-btn {
+    padding: 10px 20px;
+    background-color: #efc0c0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* Button container */
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Cancel button variation */
+.form-buttons button:last-child {
+    background-color: #ccc;
+    color: #333;
+}
+
+.form-buttons button:last-child:hover {
+    background-color: #aaa;
+}
+
+.project-form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;  /* 🔥 FIX */
+    color: #333;
+    font-size: 1rem;
+    resize: none;
+    min-height: 100px;
+}
+
+.project-form textarea:focus {
+    outline: none;
+    border: 1px solid #efc0c0;
+    box-shadow: 0 0 6px rgba(239, 192, 192, 0.5);
 }

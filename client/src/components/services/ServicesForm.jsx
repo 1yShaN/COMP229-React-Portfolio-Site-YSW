@@ -1,13 +1,10 @@
-import { useState } from "react";
-import { create } from "../../datasource/api-projects";
-import { useNavigate } from "react-router-dom";
-import ProjectModel from "../../datasource/projectModel";
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
-function FormProject({ project, handleChange, handleSubmit }) {
+const ProjectForm = ({ project, handleChange, handleSubmit }) => {
     const navigate = useNavigate();
-
+    
     return (
-
         <form onSubmit={handleSubmit} className="form">
             <input type="hidden" name="id" value={project.id || ""} />
 
@@ -58,8 +55,7 @@ function FormProject({ project, handleChange, handleSubmit }) {
                 Cancel
             </button>
         </form>
-
-    )
+    );
 }
 
-export default FormProject;
+export default ProjectForm;
