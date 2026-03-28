@@ -6,7 +6,8 @@ export default function reference() {
     // Initial references (always keep them)
     const initialreferences = [
         { name: "Prof. Mahsa Sadat Emami Taba", email: "memamita@my.centennialcollege.ca", role: "Professor" },
-        { name: "Prof. Vijayalakshmi Tiruchengode Angamuthu", email: "vtiruche@my.centennialcollege.ca", role: "Professor" }
+        { name: "Prof. Vijayalakshmi Tiruchengode Angamuthu", email: "vtiruche@my.centennialcollege.ca", role: "Professor" },
+        { name: "Prof. Yuri Vanegas", email: "yvanega1@my.centennialcollege.ca", role: "Professor" }
     ];
 
     const [backendreferences, setBackendreferences] = useState([]);

@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { create } from "../../datasource/api-projects";
-import ProjectForm from "./ProjectForm";
+import { create } from "../../datasource/api-services";
+import ServiceForm from "./ServiceForm";
 
-const AddProject = () => {
+const AddService = () => {
     const navigate = useNavigate();
 
-    const [project, setProject] = useState({
+    const [Service, setService] = useState({
         title: "",
-        completion: "",
         description: ""
     });
 
     // HANDLE INPUT
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setProject(prev => ({
+        setService(prev => ({
             ...prev,
             [name]: value
         }));
@@ -25,24 +24,24 @@ const AddProject = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const res = await create(project);
+        const res = await create(Service);
 
         if (res && res.success) {
-            alert("Project added successfully!");
+            alert("Service added successfully!");
 
             // redirect to list --> will auto reload data
-            navigate("/projects/list");
+            navigate("/Services/list");
         } else {
-            alert(res?.message || "Failed to add project");
+            alert(res?.message || "Failed to add Service");
         }
     };
 
     return (
         <div className="page">
-            <h2>Add Project</h2>
+            <h1>Add Service</h1>
 
-            <ProjectForm
-                project={project}
+            <ServiceForm
+                service={Service}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
             />
@@ -50,4 +49,4 @@ const AddProject = () => {
     );
 };
 
-export default AddProject;
+export default AddService;

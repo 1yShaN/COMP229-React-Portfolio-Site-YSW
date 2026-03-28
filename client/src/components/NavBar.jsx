@@ -25,24 +25,18 @@ function NavBar() {
                     <li className="dropdown">
                         <Link to="/services">Services</Link>
                         <ul className="dropdown-menu">
-                            <li><Link to="/services">List Services</Link></li>
+                            <li><Link to="/services/list">List Services</Link></li>
                         </ul>
                     </li>
 
                     {/* USERS */}
                     <li className="dropdown">
                         <Link to="/users">Users</Link>
-                        <ul className="dropdown-menu">
-                            <li><Link to="/users">List Users</Link></li>
-                        </ul>
                     </li>
 
                     {/* REFERENCES */}
                     <li className="dropdown">
                         <Link to="/references">References</Link>
-                        <ul className="dropdown-menu">
-                            <li><Link to="/references">List References</Link></li>
-                        </ul>
                     </li>
 
                     <li><Link to="/contact">Contact</Link></li>

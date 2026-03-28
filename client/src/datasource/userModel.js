@@ -1,11 +1,9 @@
 class UserModel
 {
-    constructor(firstName, lastName, email, password, username){
-        this.firstName = firstName
-        this.lastName = lastName
-        this.username = username
+    constructor(fullName, email, role){
+        this.fullName = fullName
         this.email = email
-        this.password = password
+        this.role = role
     }
 }
 

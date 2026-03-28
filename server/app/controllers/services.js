@@ -80,33 +80,6 @@ module.exports.processEdit = async function (req, res, next) {
     }
 }
 
-// module.exports.processEdit = async function (req, res, next) {
-//     try {
-//         let id = req.params.id;
-//         let updatedService = new servicesModel(req.body);
-//         updatedService._id = id;
-
-//         let result = await servicesModel.updateOne({ _id: id }, updatedService);
-//         console.log(result);
-
-//         if (result.modifiedCount > 0) {
-//             res.status(200)
-//             res.json({
-//                 success: true,
-//                 message: "Service updated successfully."
-//             });
-//         }
-//         else {
-//             // Express will catch this on its own.
-//             throw new Error('Service not updated. It does not exist or there is nothing to change.')
-//         }
-//     } catch (error) {
-//         console.log(error);
-//         next(error);
-//     }
-// }
-
-
 module.exports.performDelete = async function (req, res, next) {
     try {
         let id = req.params.id;

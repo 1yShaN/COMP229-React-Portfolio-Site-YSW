@@ -1,19 +1,18 @@
 
 import { useEffect, useState } from "react";
-import { list, create, update, remove } from "../../datasource/api-projects";
-import { data } from "../project";
+import { list, create, update, remove } from "../../datasource/api-services";
+import { data } from "../services";
 import { Link } from "react-router-dom";
 
-const ListProject = () => {
-    const [projects, setProjects] = useState([]);
+const Listservice = () => {
+    const [services, setservices] = useState([]);
     const [editId, setEditId] = useState(null);
     const [editData, setEditData] = useState({
         title: "",
-        completion: "",
         description: ""
     });
 
-    const loadProjects = async () => {
+    const loadservices = async () => {
         const res = await list();
 
         if (res && res.success) {
@@ -23,29 +22,27 @@ const ListProject = () => {
                         title:
                             typeof item.title === "string"
                                 ? item.title
-                                : "Imported Project",
-                        completion: new Date(),
+                                : "Imported service",
                         description: item.text
                     });
                 }
 
                 const newRes = await list();
-                setProjects(newRes.data);
+                setservices(newRes.data);
             } else {
-                setProjects(res.data);
+                setservices(res.data);
             }
         }
     };
 
     useEffect(() => {
-        loadProjects();
+        loadservices();
     }, []);
 
     const handleEdit = (p) => {
         setEditId(p.id);
         setEditData({
             title: p.title,
-            completion: p.completion?.split("T")[0] || "",
             description: p.description
         });
     };
@@ -59,50 +56,43 @@ const ListProject = () => {
         const res = await update(editData, id);
         if (res && res.success) {
             setEditId(null);
-            loadProjects();
+            loadservices();
         }
     };
 
     const handleDelete = async (id) => {
-        if (window.confirm("Delete this project?")) {
+        if (window.confirm("Delete this service?")) {
             const res = await remove(id);
-            if (res && res.success) loadProjects();
+            if (res && res.success) loadservices();
         }
     };
 
     return (
         <div className="page">
-            <h2 className="ListTitle">Project List</h2>
+            <h2 className="ListTitle">Service List</h2>
 
             <div className="table-actions">
-                <Link to="/projects/add">
-                    <button className="add-btn">Add Project</button>
+                <Link to="/services/add">
+                    <button className="add-btn">Add Service</button>
                 </Link>
             </div>
 
-            <table className="projectTable">
+            <table className="serviceTable">
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Completion</th>
                         <th>Description</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {projects.map(p => (
+                    {services.map(p => (
                         <tr key={p.id}>
                             <td>
                                 {editId === p.id ? (
                                     <input name="title" value={editData.title} onChange={handleChange} />
                                 ) : p.title}
-                            </td>
-
-                            <td>
-                                {editId === p.id ? (
-                                    <input type="date" name="completion" value={editData.completion} onChange={handleChange} />
-                                ) : p.completion ? new Date(p.completion).toLocaleDateString() : ""}
                             </td>
 
                             <td>
@@ -130,4 +120,4 @@ const ListProject = () => {
     );
 };
 
-export default ListProject;
+export default Listservice;

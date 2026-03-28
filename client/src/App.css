@@ -316,10 +316,10 @@ h2 {
 
 /* Container */
 .servicesBox {
-    padding: 0 20px 40px;
+    padding: 0 20px 30px;
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
     justify-content: center;
 }
 
@@ -401,13 +401,6 @@ h2 {
     box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
 }
 
-/* .project-form input[type="text"],
-.project-form input[type="file"] {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-} */
 
 .project-form input {
     width: 100%;
@@ -418,6 +411,10 @@ h2 {
     color: #333;
     font-size: 1rem;
     transition: all 0.3s ease;
+}
+
+.ListTitle{
+    padding-top: 40px;
 }
 
 .project-form input:focus {
@@ -593,60 +590,7 @@ h2 {
     transform: scale(1.05);
 }
 
-/* ------------------------
-   PROJECT TABLE (CRUD)
-------------------------- */
-.projectTable {
-    max-width: 900px;
-    margin: 20px auto 50px;
-    width: 95%;
-    border-collapse: collapse;
-    background-color: #fcf9f6;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-}
 
-.projectTable th,
-.projectTable td {
-    padding: 12px 10px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-}
-
-.projectTable th {
-    background-color: #efc0c0;
-    color: white;
-    font-size: 1rem;
-}
-
-.projectTable tr:nth-child(even) {
-    background-color: #fff7f7;
-}
-
-.projectTable input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 0.95rem;
-}
-
-.projectTable button {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #efc0c0;
-    color: white;
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.projectTable button:hover {
-    background-color: #ed76a3;
-    transform: scale(1.05);
-}
 
 /* ------------------------
    RESPONSIVE
@@ -913,4 +857,330 @@ h2 {
     outline: none;
     border: 1px solid #efc0c0;
     box-shadow: 0 0 6px rgba(239, 192, 192, 0.5);
+}
+
+/* ------------------------
+   SERVICE TABLE (MATCH PROJECT STYLE)
+------------------------- */
+
+.serviceTable {
+    max-width: 1000px;
+    margin: 30px auto 50px;
+    width: 95%;
+    border-collapse: collapse;
+    background-color: #fcf9f6;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.serviceTable th {
+    background-color: #efc0c0;
+    color: white;
+    padding: 14px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+/* Cells */
+.serviceTable td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+/* Zebra */
+.serviceTable tr:nth-child(even) {
+    background-color: #fff7f7;
+}
+
+/* Hover */
+.serviceTable tr:hover {
+    background-color: #fceaea;
+    transition: 0.3s;
+}
+
+/* Inputs */
+.serviceTable input,
+.serviceTable textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+}
+
+/* Buttons */
+.serviceTable button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #efc0c0;
+    color: white;
+    transition: 0.3s;
+}
+
+.serviceTable button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   ADD SERVICE BUTTON
+------------------------- */
+
+.add-service-btn {
+    padding: 10px 20px;
+    background-color: #efc0c0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-service-btn:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   SERVICE FORM
+------------------------- */
+
+.service-form {
+    max-width: 700px;
+    margin: auto;
+    background-color: #fcf9f6;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Inputs */
+.service-form input,
+.service-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Focus */
+.service-form input:focus,
+.service-form textarea:focus {
+    outline: none;
+    border: 1px solid #efc0c0;
+    box-shadow: 0 0 6px rgba(239, 192, 192, 0.5);
+}
+
+/* Textarea */
+.service-form textarea {
+    min-height: 100px;
+    resize: none;
+}
+
+/* Buttons container */
+.service-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+.service-form button {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Save */
+.service-form button:first-child {
+    background-color: #efc0c0;
+    color: white;
+}
+
+.service-form button:first-child:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* Cancel */
+.service-form button:last-child {
+    background-color: #ccc;
+    color: #333;
+}
+
+.service-form button:last-child:hover {
+    background-color: #aaa;
+}
+
+/* ------------------------
+   SERVICE TABLE (MATCH PROJECT STYLE)
+------------------------- */
+
+.serviceTable {
+    max-width: 1000px;
+    margin: 30px auto 50px;
+    width: 95%;
+    border-collapse: collapse;
+    background-color: #fcf9f6;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.serviceTable th {
+    background-color: #efc0c0;
+    color: white;
+    padding: 14px;
+    text-align: left;
+    font-size: 1rem;
+}
+
+/* Cells */
+.serviceTable td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+/* Zebra */
+.serviceTable tr:nth-child(even) {
+    background-color: #fff7f7;
+}
+
+/* Hover */
+.serviceTable tr:hover {
+    background-color: #fceaea;
+    transition: 0.3s;
+}
+
+/* Inputs */
+.serviceTable input,
+.serviceTable textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+}
+
+/* Buttons */
+.serviceTable button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #efc0c0;
+    color: white;
+    transition: 0.3s;
+}
+
+.serviceTable button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   ADD SERVICE BUTTON
+------------------------- */
+
+.add-service-btn {
+    padding: 10px 20px;
+    background-color: #efc0c0;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-service-btn:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   SERVICE FORM
+------------------------- */
+
+.service-form {
+    max-width: 700px;
+    margin: auto;
+    background-color: #fcf9f6;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Inputs */
+.service-form input,
+.service-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Focus */
+.service-form input:focus,
+.service-form textarea:focus {
+    outline: none;
+    border: 1px solid #efc0c0;
+    box-shadow: 0 0 6px rgba(239, 192, 192, 0.5);
+}
+
+/* Textarea */
+.service-form textarea {
+    min-height: 100px;
+    resize: none;
+}
+
+/* Buttons container */
+.service-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+.service-form button {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Save */
+.service-form button:first-child {
+    background-color: #efc0c0;
+    color: white;
+}
+
+.service-form button:first-child:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* Cancel */
+.service-form button:last-child {
+    background-color: #ccc;
+    color: #333;
+}
+
+.service-form button:last-child:hover {
+    background-color: #aaa;
 }

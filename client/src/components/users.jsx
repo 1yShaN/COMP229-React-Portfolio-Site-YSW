@@ -5,8 +5,8 @@ export default function User() {
 
     // Initial users (always keep them)
     const initialUsers = [
-        { name: "Jennifer Wang", email: "jennifer@email.com", role: "Admin" },
-        { name: "John Doe", email: "john@email.com", role: "User" }
+        { name: "Jennifer Wang", email: "jennifer@email.com", role: "Admin" }
+        // { name: "John Doe", email: "john@email.com", role: "User" }
     ];
 
     const [backendUsers, setBackendUsers] = useState([]);

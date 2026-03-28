@@ -53,15 +53,15 @@ module.exports.getById = async function (req, res, next) {
     }
 };
 
-// ✅ UPDATE (FIXED)
+//  UPDATE 
 module.exports.processEdit = async function (req, res, next) {
     try {
         let id = req.params.id;
 
         let result = await projectsModel.findByIdAndUpdate(
             id,
-            req.body,                // ✅ directly update with body
-            { new: true }           // ✅ return updated doc
+            req.body,                //  directly update with body
+            { new: true }           //  return updated doc
         );
 
         if (result) {

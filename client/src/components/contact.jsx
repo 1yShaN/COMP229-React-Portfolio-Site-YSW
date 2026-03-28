@@ -24,7 +24,7 @@ export default function Contact() {
     try {
       const response = await axios.get(API_URL);
       console.log("Contacts from backend:", response.data);
-      setContacts(response.data.data); // ✅ Use data array from backend
+      setContacts(response.data.data); //  Use data array from backend
     } catch (error) {
       console.error("Error fetching contacts:", error);
     }
@@ -39,10 +39,10 @@ const handleSubmit = async (e) => {
 
   try {
     if (editId !== null && editId !== undefined) {
-      // ✅ Update
+      //  Update
       await axios.put(`${API_URL}/${editId}`, formData);
     } else {
-      // ✅ Create
+      //  Create
       await axios.post(API_URL, formData);
     }
 

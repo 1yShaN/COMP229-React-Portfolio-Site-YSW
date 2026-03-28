@@ -1,6 +1,6 @@
 
 let apiURL = import.meta.env.VITE_APP_APIURL;
-let endpoint = "/api/projects/";
+let endpoint = "/api/services/";
 
 // GET ALL
 const list = async () => {
@@ -14,14 +14,14 @@ const list = async () => {
 };
 
 // CREATE
-const create = async (project) => {
+const create = async (service) => {
     try {
         const response = await fetch(`${apiURL}${endpoint}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(project)
+            body: JSON.stringify(service)
         });
         return await response.json();
     } catch (error) {
@@ -44,14 +44,14 @@ const remove = async (id) => {
 };
 
 // UPDATE
-const update = async (project, id) => {
+const update = async (service, id) => {
     try {
         const response = await fetch(`${apiURL}${endpoint}${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(project)
+            body: JSON.stringify(service)
         });
         return await response.json();
     } catch (error) {

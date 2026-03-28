@@ -51,8 +51,8 @@ module.exports.processEdit = async function (req, res, next) {
     try {
         const updatedContact = await contactsModel.findByIdAndUpdate(
             req.params.id,
-            { $set: req.body }, // ✅ Only update the fields provided
-            { new: true }       // ✅ Return the updated contact
+            { $set: req.body }, //  Only update the fields provided
+            { new: true }       //  Return the updated contact
         );
 
         if (!updatedContact) {

@@ -2,7 +2,7 @@ let usersModel = require('../models/users');
 
 module.exports.processAdd = async function (req, res, next) {
     try {
-        console.log("Incoming:", req.body); // 👈 IMPORTANT DEBUG
+        console.log("Incoming:", req.body); // IMPORTANT DEBUG
 
         let newUser = new usersModel({
             name: req.body.name,
