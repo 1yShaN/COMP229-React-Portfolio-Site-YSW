@@ -9,7 +9,7 @@ export default function Services() {
 
     const API_URL = "http://localhost:3000/api/services";
 
-    // Initial data (NO edit/delete)
+    // DEFAULT SERVICES (NO EDIT / DELETE)
     const initialServices = [
         {
             imagePath: service01,
@@ -28,8 +28,8 @@ export default function Services() {
         }
     ];
 
-    const [backendservices, setBackendservices] = useState([]);
-    const [formservice, setFormservice] = useState({
+    const [backendServices, setBackendServices] = useState([]);
+    const [formService, setFormService] = useState({
         title: "",
         description: ""
     });
@@ -37,23 +37,22 @@ export default function Services() {
 
     // FETCH
     useEffect(() => {
-        fetchservices();
+        fetchServices();
     }, []);
 
-    const fetchservices = async () => {
+    const fetchServices = async () => {
         try {
             const res = await axios.get(API_URL);
-            setBackendservices(res.data.data || []);
+            setBackendServices(res.data.data || []);
         } catch (err) {
             console.log("Using default services only");
-            setBackendservices([]);
         }
     };
 
-    // INPUT
+    // INPUT CHANGE
     const handleChange = (e) => {
-        setFormservice({
-            ...formservice,
+        setFormService({
+            ...formService,
             [e.target.name]: e.target.value
         });
     };
@@ -63,18 +62,21 @@ export default function Services() {
         e.preventDefault();
 
         try {
-            if (editId !== null && editId !== undefined) {
+            if (editId) {
                 // UPDATE
-                await axios.put(`${API_URL}/${editId}`, formservice);
+                await axios.put(`${API_URL}/${editId}`, formService);
             } else {
                 // CREATE
-                await axios.post(API_URL, formservice);
+                await axios.post(API_URL, formService);
             }
 
-            await fetchservices();
+            setFormService({
+                title: "",
+                description: ""
+            });
 
-            setFormservice({ title: "", description: "" });
             setEditId(null);
+            fetchServices();
 
         } catch (err) {
             console.error("Error saving service:", err);
@@ -83,29 +85,25 @@ export default function Services() {
 
     // EDIT
     const handleEdit = (serv) => {
-        if (!serv._id) return;
-
-        setFormservice({
+        setFormService({
             title: serv.title || "",
             description: serv.description || ""
         });
 
-        setEditId(serv._id);
+        setEditId(serv.id); // ✅ FIXED (use id)
     };
 
     // DELETE
-    const handleDelete = async (serv) => {
-        if (!serv._id) return;
-
+    const handleDelete = async (id) => {
         try {
-            await axios.delete(`${API_URL}/${serv._id}`);
-            fetchservices();
+            await axios.delete(`${API_URL}/${id}`);
+            fetchServices();
         } catch (err) {
             console.error("Error deleting service:", err);
         }
     };
 
-    const allservices = [...initialServices, ...backendservices];
+    const allServices = [...initialServices, ...backendServices];
 
     return (
         <>
@@ -118,7 +116,7 @@ export default function Services() {
                     type="text"
                     name="title"
                     placeholder="Service Title"
-                    value={formservice.title}
+                    value={formService.title}
                     onChange={handleChange}
                     required
                 />
@@ -127,32 +125,21 @@ export default function Services() {
                     type="text"
                     name="description"
                     placeholder="Service Description"
-                    value={formservice.description}
+                    value={formService.description}
                     onChange={handleChange}
                     required
                 />
 
-                <div style={{ display: "flex", gap: "10px" }}>
-                    <button type="submit">
-                        {editId ? "Update" : "Add"} Service
-                    </button>
-
-                    {editId && (
-                        <button type="button" onClick={() => {
-                            setFormservice({ title: "", description: "" });
-                            setEditId(null);
-                        }}>
-                            Cancel
-                        </button>
-                    )}
-                </div>
+                <button type="submit">
+                    {editId ? "Update" : "Add"} Service
+                </button>
 
             </form>
 
-            {/* LIST */}
+            {/* SERVICES LIST */}
             <div className="servicesBox">
-                {allservices.map((serv, index) => (
-                    <div key={serv._id || index} className="serviceCard">
+                {allServices.map((serv, index) => (
+                    <div key={serv.id || index} className="serviceCard">
 
                         {serv.imagePath && (
                             <img
@@ -165,18 +152,13 @@ export default function Services() {
                         <h3>{serv.title}</h3>
                         <p>{serv.description}</p>
 
-                        {/* ✅ ONLY backend items can edit/delete */}
-                        {serv._id && (
+                        {/* ONLY BACKEND SERVICES HAVE BUTTONS */}
+                        {backendServices.includes(serv) && (
                             <div className="serviceActions">
-                                <button onClick={() => handleEdit(serv)}>
-                                    Edit
-                                </button>
-                                <button onClick={() => handleDelete(serv)}>
-                                    Delete
-                                </button>
+                                <button onClick={() => handleEdit(serv)}>Edit</button>
+                                <button onClick={() => handleDelete(serv.id)}>Delete</button>
                             </div>
                         )}
-
                     </div>
                 ))}
             </div>

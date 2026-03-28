@@ -71,7 +71,7 @@ const handleEdit = (contact) => {
     message: contact.message,
   });
 
-  setEditId(contact._id); // must exist now
+  setEditId(contact.id); // must exist now
 };
 
   const handleDelete = async (id) => {
@@ -144,7 +144,7 @@ const handleEdit = (contact) => {
       {/* CONTACT LIST */}
       <div className="contactList">
         {contacts.map((c) => (
-          <div key={c._id} className="contactCard">
+          <div key={c.id} className="contactCard">
             <h3>
               {c.firstName} {c.lastName}
             </h3>
@@ -153,7 +153,7 @@ const handleEdit = (contact) => {
             <p>{c.message}</p>
             <div className="contactActions">
               <button onClick={() => handleEdit(c)}>Edit</button>
-              <button onClick={() => handleDelete(c._id)}>Delete</button>
+              <button onClick={() => handleDelete(c.id)}>Delete</button>
             </div>
           </div>
         ))}

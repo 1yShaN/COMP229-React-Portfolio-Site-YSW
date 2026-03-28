@@ -105,7 +105,7 @@ export default function Project() {
                description: proj.description
           });
 
-          setEditId(proj._id);
+          setEditId(proj.id);
      };
 
      // DELETE
@@ -163,7 +163,7 @@ export default function Project() {
                {/* PROJECT LIST */}
                <div className="projectsBox">
                     {allProjects.map((proj, index) => (
-                         <div key={proj._id || index} className="projectCard">
+                         <div key={proj.id || index} className="projectCard">
 
                               {/* DEFAULT IMAGES ONLY */}
                               {proj.imagePath && (
@@ -189,7 +189,7 @@ export default function Project() {
                               {backendProjects.includes(proj) && (
                                    <div className="projectActions">
                                         <button onClick={() => handleEdit(proj)}>Edit</button>
-                                        <button onClick={() => handleDelete(proj._id)}>Delete</button>
+                                        <button onClick={() => handleDelete(proj.id)}>Delete</button>
                                    </div>
                               )}
                          </div>

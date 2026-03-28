@@ -57,7 +57,7 @@ export default function User() {
     // Edit backend user
     const handleEdit = (user) => {
         setFormUser({ name: user.name, email: user.email, role: user.role });
-        setEditId(user._id); // Only backend users have _id
+        setEditId(user.id); // Only backend users have _id
     };
 
     // Delete backend user
@@ -113,19 +113,19 @@ export default function User() {
             {/* USERS LIST */}
             <div className="userBox">
                 {displayedUsers.map((user, index) => (
-                    <div key={user._id || index} className="userCard">
+                    <div key={user.id || index} className="userCard">
 
                         <h3>{user.name}</h3>
                         <p>{user.email}</p>
 
                         <span className="userRole">{user.role}</span>
 
-                        {user._id && (
+                        {user.id && (
                             <div className="userActions">
                                 <button onClick={() => handleEdit(user)}>Edit</button>
 
                                 {user.role !== "Admin" && (
-                                    <button onClick={() => handleDelete(user._id)}>Delete</button>
+                                    <button onClick={() => handleDelete(user.id)}>Delete</button>
                                 )}
                             </div>
                         )}

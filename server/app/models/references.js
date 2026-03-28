@@ -6,8 +6,7 @@ let referencesModel = mongoose.Schema(
         // lastname: String,
         name: String,
         email: String,
-        // position: String,
-        // company: String
+        role: String
     },
     {
         collection: "references"

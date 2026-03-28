@@ -16,7 +16,8 @@ servicesModel.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
-        delete ret._id
+        ret.id = ret._id;   // ✅ keep id for frontend
+        delete ret._id;
     }
 });
 

@@ -57,7 +57,7 @@ export default function reference() {
     // Edit backend reference
     const handleEdit = (reference) => {
         setFormreference({ name: reference.name, email: reference.email, role: reference.role });
-        setEditId(reference._id); // Only backend references have _id
+        setEditId(reference.id); // Only backend references have _id
     };
 
     // Delete backend reference
@@ -113,17 +113,18 @@ export default function reference() {
             {/* referenceS LIST */}
             <div className="referenceBox">
                 {displayedreferences.map((reference, index) => (
-                    <div key={reference._id || index} className="referenceCard">
+                    <div key={reference.id || index} className="referenceCard">
 
                         <h3>{reference.name}</h3>
                         <p>{reference.email}</p>
+                        <p className="referenceRole">{reference.role}</p>
 
                         {backendreferences.includes(reference) && (
                             <div className="referenceActions">
                                 <button onClick={() => handleEdit(reference)}>Edit</button>
 
                                 {reference.role !== "Admin" && (
-                                    <button onClick={() => handleDelete(reference._id)}>Delete</button>
+                                    <button onClick={() => handleDelete(reference.id)}>Delete</button>
                                 )}
                             </div>
                         )}
