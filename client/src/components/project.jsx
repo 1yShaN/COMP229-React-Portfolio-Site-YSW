@@ -4,150 +4,197 @@ import photo01 from '../assets/project01.png';
 import photo02 from '../assets/project02.png';
 import photo03 from '../assets/project03.png';
 
+// Fix date format
+function formatDate(value) {
+     if (!value) return "";
+     const date = new Date(value);
+     if (isNaN(date)) return "";
+     return date.toISOString().split("T")[0];
+}
+
 export default function Project() {
 
-  const API_URL = "http://localhost:3000/api/projects";
+     const API_URL = "http://localhost:3000/api/projects";
 
-  // Initial projects
-  const initialProjects = [
-    {
-      imagePath: photo01,
-      title: "Crystal Village Resort Spa",
-      text: 'I independently designed and developed the Crystal Village Resort Spa service website...'
-    },
-    {
-      imagePath: photo02,
-      title: 'BMR Calculator',
-      text: 'I designed and developed a BMR (Basal Metabolic Rate) Calculator web application...'
-    },
-    {
-      imagePath: photo03,
-      title: 'Interactive Slideshow',
-      text: 'I developed an interactive image slideshow that allows users to navigate through images...'
-    }
-  ];
+     // ✅ DEFAULT PROJECTS (NO EDIT / DELETE)
+     const initialProjects = [
+          {
+               imagePath: photo01,
+               title: "Crystal Village Resort Spa",
+               completion: "2025-08-31",
+               description: "I independently designed and developed the Crystal Village Resort Spa website."
+          },
+          {
+               imagePath: photo02,
+               title: "BMR Calculator",
+               completion: "2025-11-30",
+               description: "A web app to calculate daily calorie requirements."
+          },
+          {
+               imagePath: photo03,
+               title: "Interactive Slideshow",
+               completion: "2025-12-07",
+               description: "An image slideshow with controls and auto-play."
+          }
+     ];
 
-  // State
-  const [projects, setProjects] = useState(initialProjects);
-  const [formProject, setFormProject] = useState({ imagePath: '', title: '', text: '' });
-  const [editIndex, setEditIndex] = useState(null);
+     const [backendProjects, setBackendProjects] = useState([]);
+     const [formProject, setFormProject] = useState({
+          title: "",
+          completion: "",
+          description: ""
+     });
+     const [editId, setEditId] = useState(null);
 
-  // ✅ FETCH FROM BACKEND
-  useEffect(() => {
-    fetchProjects();
-  }, []);
+     // FETCH
+     useEffect(() => {
+          fetchProjects();
+     }, []);
 
-  const fetchProjects = async () => {
-    try {
-      const res = await axios.get(API_URL);
-      if (res.data.data.length > 0) {
-        setProjects(res.data.data); // use DB data
-      }
-    } catch (err) {
-      console.log("Backend not connected, using default projects");
-    }
-  };
+     const fetchProjects = async () => {
+          try {
+               const res = await axios.get(API_URL);
+               setBackendProjects(res.data.data || []);
+          } catch (err) {
+               console.log("Using default projects only");
+          }
+     };
 
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === 'imagePath' && files && files[0]) {
-      setFormProject({ ...formProject, imagePath: URL.createObjectURL(files[0]) });
-    } else {
-      setFormProject({ ...formProject, [name]: value });
-    }
-  };
+     // INPUT CHANGE
+     const handleChange = (e) => {
+          setFormProject({
+               ...formProject,
+               [e.target.name]: e.target.value
+          });
+     };
 
-  // ✅ ADD / UPDATE (CONNECTED)
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+     // ADD / UPDATE
+     const handleSubmit = async (e) => {
+          e.preventDefault();
 
-    try {
-      if (editIndex !== null && projects[editIndex]._id) {
-        // UPDATE
-        await axios.put(`${API_URL}/${projects[editIndex]._id}`, formProject);
-      } else {
-        // CREATE
-        await axios.post(API_URL, formProject);
-      }
+          try {
+               if (editId) {
+                    // UPDATE
+                    await axios.put(`${API_URL}/${editId}`, formProject);
+               } else {
+                    // CREATE
+                    await axios.post(API_URL, formProject);
+               }
 
-      fetchProjects(); // refresh from DB
+               setFormProject({
+                    title: "",
+                    completion: "",
+                    description: ""
+               });
 
-    } catch (err) {
-      console.error(err);
-    }
+               setEditId(null);
+               fetchProjects();
 
-    setFormProject({ imagePath: '', title: '', text: '' });
-    setEditIndex(null);
-  };
+          } catch (err) {
+               console.error("Error saving project:", err);
+          }
+     };
 
-  // Edit project
-  const handleEdit = (index) => {
-    setFormProject({ ...projects[index] });
-    setEditIndex(index);
-  };
+     // EDIT
+     const handleEdit = (proj) => {
+          setFormProject({
+               title: proj.title,
+               completion: proj.completion
+                ? new Date(proj.completion).toISOString().split("T")[0]
+                : "",
+               description: proj.description
+          });
 
-  // ✅ DELETE (CONNECTED)
-  const handleDelete = async (index) => {
-    try {
-      if (projects[index]._id) {
-        await axios.delete(`${API_URL}/${projects[index]._id}`);
-        fetchProjects();
-      } else {
-        // fallback for default items
-        setProjects(prev => prev.filter((_, i) => i !== index));
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
+          setEditId(proj._id);
+     };
 
-  return (
-    <>
-      <h2>My Projects</h2>
+     // DELETE
+     const handleDelete = async (id) => {
+          try {
+               await axios.delete(`${API_URL}/${id}`);
+               fetchProjects();
+          } catch (err) {
+               console.error("Error deleting project:", err);
+          }
+     };
 
-      {/* Form */}
-      <form onSubmit={handleSubmit} className="project-form">
-        <input type="file" name="imagePath" onChange={handleChange} />
+     const allProjects = [...initialProjects, ...backendProjects];
 
-        <input
-          type="text"
-          name="title"
-          placeholder="Project Title"
-          value={formProject.title}
-          onChange={handleChange}
-          required
-        />
+     return (
+          <>
+               <h2>My Projects</h2>
 
-        <input
-          type="text"
-          name="text"
-          placeholder="Project Description"
-          value={formProject.text}
-          onChange={handleChange}
-          required
-        />
+               {/* FORM */}
+               <form onSubmit={handleSubmit} className="project-form">
 
-        <button type="submit">
-          {editIndex !== null ? 'Update' : 'Add'} Project
-        </button>
-      </form>
+                    <input
+                         type="text"
+                         name="title"
+                         placeholder="Project Title"
+                         value={formProject.title}
+                         onChange={handleChange}
+                         required
+                    />
 
-      {/* Project List */}
-      <div className="projectsBox">
-        {projects.map((proj, index) => (
-          <div key={proj._id || index} className="projectCard">
-            <img src={proj.imagePath} alt="Project" className="projectImage" />
-            <h3>{proj.title}</h3>
-            <p>{proj.text}</p>
+                    {/* ✅ DATE PICKER */}
+                    <input
+                         type="date"
+                         name="completion"
+                         value={formProject.completion}
+                         onChange={handleChange}
+                         required
+                    />
 
-            <div className="projectActions">
-              <button onClick={() => handleEdit(index)}>Edit</button>
-              <button onClick={() => handleDelete(index)}>Delete</button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
+                    <input
+                         type="text"
+                         name="description"
+                         placeholder="Project Description"
+                         value={formProject.description}
+                         onChange={handleChange}
+                         required
+                    />
+
+                    <button type="submit">
+                         {editId ? "Update" : "Add"} Project
+                    </button>
+
+               </form>
+
+               {/* PROJECT LIST */}
+               <div className="projectsBox">
+                    {allProjects.map((proj, index) => (
+                         <div key={proj._id || index} className="projectCard">
+
+                              {/* DEFAULT IMAGES ONLY */}
+                              {proj.imagePath && (
+                                   <img
+                                        src={proj.imagePath}
+                                        alt="Project"
+                                        className="projectImage"
+                                   />
+                              )}
+
+                              <h3>{proj.title}</h3>
+
+                              <p>
+                                   <strong>Completion:</strong>{" "}
+                                   {proj.completion
+                                        ? new Date(proj.completion).toLocaleDateString()
+                                        : "N/A"}
+                              </p>
+
+                              <p>{proj.description}</p>
+
+                              {/* ✅ ONLY BACKEND PROJECTS HAVE BUTTONS */}
+                              {backendProjects.includes(proj) && (
+                                   <div className="projectActions">
+                                        <button onClick={() => handleEdit(proj)}>Edit</button>
+                                        <button onClick={() => handleDelete(proj._id)}>Delete</button>
+                                   </div>
+                              )}
+                         </div>
+                    ))}
+               </div>
+          </>
+     );
 }

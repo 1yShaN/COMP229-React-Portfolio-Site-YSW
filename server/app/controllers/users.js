@@ -2,23 +2,26 @@ let usersModel = require('../models/users');
 
 module.exports.processAdd = async function (req, res, next) {
     try {
-        let newUser = new usersModel(req.body);
+        console.log("Incoming:", req.body); // 👈 IMPORTANT DEBUG
+
+        let newUser = new usersModel({
+            name: req.body.name,
+            email: req.body.email,
+            role: req.body.role
+        });
 
         let result = await usersModel.create(newUser);
-        console.log(result);
 
-        res.status(200)
         res.json({
             success: true,
-            message: "User added successfully.",
             data: result
         });
+
     } catch (error) {
         console.log(error);
         next(error);
     }
-
-}
+};
 
 module.exports.list = async function (req, res, next) {
     try {
@@ -57,28 +60,34 @@ module.exports.getById = async function (req, res, next) {
 module.exports.processEdit = async function (req, res, next) {
     try {
         let id = req.params.id;
-        let updatedUser = new usersModel(req.body);
-        updatedUser._id = id;
 
-        let result = await usersModel.updateOne({ _id: id }, updatedUser);
+        let result = await usersModel.updateOne(
+            { _id: id },
+            {
+                $set: {
+                    name: req.body.name,
+                    email: req.body.email,
+                    role: req.body.role
+                }
+            }
+        );
+
         console.log(result);
 
         if (result.modifiedCount > 0) {
-            res.status(200)
-            res.json({
+            res.status(200).json({
                 success: true,
                 message: "User updated successfully."
             });
+        } else {
+            throw new Error('User not updated. It may not exist.');
         }
-        else {
-            // Express will catch this on its own.
-            throw new Error('User not updated. It does not exist or there is nothing to change.')
-        }
+
     } catch (error) {
         console.log(error);
         next(error);
     }
-}
+};
 
 
 module.exports.performDelete = async function (req, res, next) {

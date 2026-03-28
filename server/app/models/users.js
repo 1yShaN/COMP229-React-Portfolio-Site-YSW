@@ -2,19 +2,19 @@ let mongoose = require('mongoose');
 
 let usersModel = mongoose.Schema(
     {
-        firstname: String,
-        lastname: String,
+        name: String,
         email: String,
-        password: String,
-        created: Date,
-        updated: Date
+        role: String,
+        // password: String,
+        // created: Date,
+        // updated: Date
     },
     {
         collection: "users"
     }
 );
 
-// Ensure virtual fields are serialised.
+//Ensure virtual fields are serialised.
 usersModel.set('toJSON', {
     virtuals: true,
     versionKey: false,
@@ -22,5 +22,6 @@ usersModel.set('toJSON', {
         delete ret._id
     }
 });
+
 
 module.exports = mongoose.model("Users", usersModel);

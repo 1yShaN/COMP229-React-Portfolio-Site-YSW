@@ -1,13 +1,14 @@
-let ProjectsModel = require('../models/projects');
+let projectsModel = require('../models/projects');
 
-// Add a new project
+// CREATE
 module.exports.processAdd = async function (req, res, next) {
     try {
-        const newProject = await ProjectsModel.create(req.body);
+        let result = await projectsModel.create(req.body);
+
         res.status(200).json({
             success: true,
-            message: "Project added successfully.",
-            data: newProject
+            message: "project added successfully.",
+            data: result
         });
     } catch (error) {
         console.log(error);
@@ -15,13 +16,14 @@ module.exports.processAdd = async function (req, res, next) {
     }
 };
 
-// List all projects
+// READ ALL
 module.exports.list = async function (req, res, next) {
     try {
-        const list = await ProjectsModel.find({});
+        let list = await projectsModel.find({});
+
         res.json({
             success: true,
-            message: "Projects list retrieved successfully.",
+            message: "projects list retrieved successfully.",
             data: list
         });
     } catch (error) {
@@ -30,14 +32,19 @@ module.exports.list = async function (req, res, next) {
     }
 };
 
-// Get a project by ID
+// READ ONE
 module.exports.getById = async function (req, res, next) {
     try {
-        const project = await ProjectsModel.findById(req.params.id);
-        if (!project) throw new Error('Project not found.');
+        let id = req.params.id;
+
+        let project = await projectsModel.findById(id);
+
+        if (!project)
+            throw new Error('project not found.');
+
         res.json({
             success: true,
-            message: "Project retrieved successfully.",
+            message: "project retrieved successfully.",
             data: project
         });
     } catch (error) {
@@ -46,27 +53,26 @@ module.exports.getById = async function (req, res, next) {
     }
 };
 
-// Update a project
+// ✅ UPDATE (FIXED)
 module.exports.processEdit = async function (req, res, next) {
     try {
-        const updatedProject = await ProjectsModel.findByIdAndUpdate(
-            req.params.id,
-            { $set: req.body }, // ✅ Only update the fields provided
-            { new: true }       // ✅ Return the updated project
+        let id = req.params.id;
+
+        let result = await projectsModel.findByIdAndUpdate(
+            id,
+            req.body,                // ✅ directly update with body
+            { new: true }           // ✅ return updated doc
         );
 
-        if (!updatedProject) {
-            return res.status(404).json({
-                success: false,
-                message: "Project not found"
+        if (result) {
+            res.status(200).json({
+                success: true,
+                message: "project updated successfully.",
+                data: result
             });
+        } else {
+            throw new Error('project not found.');
         }
-
-        res.json({
-            success: true,
-            message: "Project updated successfully",
-            data: updatedProject
-        });
 
     } catch (error) {
         console.log(error);
@@ -74,19 +80,22 @@ module.exports.processEdit = async function (req, res, next) {
     }
 };
 
-// Delete a project
+// DELETE
 module.exports.performDelete = async function (req, res, next) {
     try {
-        const result = await ProjectsModel.deleteOne({ _id: req.params.id });
+        let id = req.params.id;
 
-        if (result.deletedCount > 0) {
-            res.json({
+        let result = await projectsModel.findByIdAndDelete(id);
+
+        if (result) {
+            res.status(200).json({
                 success: true,
-                message: "Project deleted successfully"
+                message: "project deleted successfully."
             });
         } else {
-            throw new Error('Project not deleted. ID may be incorrect.');
+            throw new Error('project not found.');
         }
+
     } catch (error) {
         console.log(error);
         next(error);

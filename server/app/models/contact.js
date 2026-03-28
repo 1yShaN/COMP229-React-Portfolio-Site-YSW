@@ -18,7 +18,7 @@ contactsModel.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
-        ret._id = ret._id; // ensure it exists
+        delete ret._id;
     }
 });
 

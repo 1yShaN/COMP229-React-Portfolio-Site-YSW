@@ -2,6 +2,7 @@ let mongoose = require('mongoose');
 
 let projectsModel = mongoose.Schema(
     {
+        imagePath: String,
         title: String,
         completion: Date, 
         description: String
@@ -17,7 +18,7 @@ projectsModel.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) {
-        delete ret._id
+        delete ret._id;
     }
 });
 

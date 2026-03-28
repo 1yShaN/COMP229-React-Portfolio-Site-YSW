@@ -2,11 +2,12 @@ let mongoose = require('mongoose');
 
 let referencesModel = mongoose.Schema(
     {
-        firstname: String,
-        lastname: String,
+        // firstname: String,
+        // lastname: String,
+        name: String,
         email: String,
-        position: String,
-        company: String
+        // position: String,
+        // company: String
     },
     {
         collection: "references"

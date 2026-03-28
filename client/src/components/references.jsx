@@ -1,91 +1,136 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Reference() {
+export default function reference() {
 
-  const [References, setReferences] = useState([]);
-  const [formReference, setFormReference] = useState({ name: "", email: "", role: "" });
-  const [editId, setEditId] = useState(null);
+    // Initial references (always keep them)
+    const initialreferences = [
+        { name: "Prof. Mahsa Sadat Emami Taba", email: "memamita@my.centennialcollege.ca", role: "Professor" },
+        { name: "Prof. Vijayalakshmi Tiruchengode Angamuthu", email: "vtiruche@my.centennialcollege.ca", role: "Professor" }
+    ];
 
-  const API_URL = "http://localhost:3000/api/references";
+    const [backendreferences, setBackendreferences] = useState([]);
+    const [formreference, setFormreference] = useState({ name: "", email: "", role: "" });
+    const [editId, setEditId] = useState(null);
 
-  // Fetch References from backend
-  useEffect(() => {
-    fetchReferences();
-  }, []);
+    const API_URL = "http://localhost:3000/api/references";
 
-  const fetchReferences = async () => {
-    try {
-      const response = await axios.get(API_URL);
-      const backendReferences = response.data.data || [];
-      setReferences(backendReferences); // ONLY backend data
-    } catch (error) {
-      console.error("Error fetching References:", error);
-    }
-  };
+    // Fetch backend references from MongoDB
+    useEffect(() => {
+        fetchreferences();
+    }, []);
 
-  const handleChange = (e) => {
-    setFormReference({ ...formReference, [e.target.name]: e.target.value });
-  };
+    const fetchreferences = async () => {
+        try {
+            const response = await axios.get(API_URL);
+            const references = response.data.data || [];
+            setBackendreferences(references);
+        } catch (error) {
+            console.error("Error fetching references:", error);
+            setBackendreferences([]);
+        }
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    // Handle form input changes
+    const handleChange = (e) => {
+        setFormreference({ ...formreference, [e.target.name]: e.target.value });
+    };
 
-    try {
-      if (editId) {
-        await axios.put(`${API_URL}/${editId}`, formReference);
-      } else {
-        await axios.post(API_URL, formReference);
-      }
+    // Add or update backend reference
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-      setFormReference({ name: "", email: "", role: "" });
-      setEditId(null);
-      fetchReferences();
-    } catch (error) {
-      console.error("Error saving Reference:", error);
-    }
-  };
+        try {
+            if (editId) {
+                await axios.put(`${API_URL}/${editId}`, formreference);
+            } else {
+                await axios.post(API_URL, formreference);
+            }
+            setFormreference({ name: "", email: "", role: "" });
+            setEditId(null);
+            fetchreferences();
+        } catch (error) {
+            console.error("Error saving reference:", error);
+        }
+    };
 
-  const handleEdit = (ref) => {
-    setFormReference({ name: ref.name, email: ref.email, role: ref.role });
-    setEditId(ref._id); // Must exist
-  };
+    // Edit backend reference
+    const handleEdit = (reference) => {
+        setFormreference({ name: reference.name, email: reference.email, role: reference.role });
+        setEditId(reference._id); // Only backend references have _id
+    };
 
-  const handleDelete = async (id) => {
-    if (!id) return;
+    // Delete backend reference
+    const handleDelete = async (id) => {
+        if (!id) {
+            alert("Cannot delete default reference");
+            return;
+        }
+        try {
+            await axios.delete(`${API_URL}/${id}`);
+            fetchreferences();
+        } catch (error) {
+            console.error("Error deleting reference:", error);
+        }
+    };
 
-    try {
-      await axios.delete(`${API_URL}/${id}`);
-      fetchReferences();
-    } catch (error) {
-      console.error("Error deleting Reference:", error);
-    }
-  };
+    // Merge initial + backend references
+    const displayedreferences = [...initialreferences, ...backendreferences];
 
-  return (
-    <>
-      <h2>References</h2>
+    return (
+        <>
+            <h2>References</h2>
 
-      <form onSubmit={handleSubmit} className="project-form">
-        <input type="text" name="name" placeholder="Full Name" value={formReference.name} onChange={handleChange} required />
-        <input type="email" name="email" placeholder="Email" value={formReference.email} onChange={handleChange} required />
-        <input type="text" name="role" placeholder="Role" value={formReference.role} onChange={handleChange} required />
-        <button type="submit">{editId ? "Update" : "Add"} Reference</button>
-      </form>
+            {/* FORM */}
+            <form onSubmit={handleSubmit} className="project-form">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    value={formreference.name}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={formreference.email}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="text"
+                    name="role"
+                    placeholder="Role"
+                    value={formreference.role}
+                    onChange={handleChange}
+                    required
+                />
+                <button type="submit">{editId ? "Update" : "Add"} reference</button>
+            </form>
 
-      <div className="servicesBox">
-        {References.map((ref) => (
-          <div key={ref._id} className="projectCard">
-            <h3>{ref.name}</h3>
-            <p>{ref.email}</p>
-            <p><strong>{ref.role}</strong></p>
-            <div className="projectActions">
-              <button onClick={() => handleEdit(ref)}>Edit</button>
-              <button onClick={() => handleDelete(ref._id)}>Delete</button>
+            {/* referenceS LIST */}
+            <div className="referenceBox">
+                {displayedreferences.map((reference, index) => (
+                    <div key={reference._id || index} className="referenceCard">
+
+                        <h3>{reference.name}</h3>
+                        <p>{reference.email}</p>
+
+                        {backendreferences.includes(reference) && (
+                            <div className="referenceActions">
+                                <button onClick={() => handleEdit(reference)}>Edit</button>
+
+                                {reference.role !== "Admin" && (
+                                    <button onClick={() => handleDelete(reference._id)}>Delete</button>
+                                )}
+                            </div>
+                        )}
+
+                    </div>
+                ))}
             </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
+        </>
+    );
 }

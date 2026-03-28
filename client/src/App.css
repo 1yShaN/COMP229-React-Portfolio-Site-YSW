@@ -377,17 +377,38 @@ h2 {
     flex-direction: column;
     gap: 15px;
     background-color: #fcf9f6;
-    padding: 20px;
+    padding: 35px;
     border-radius: 15px;
     box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
 }
 
-.project-form input[type="text"],
+/* .project-form input[type="text"],
 .project-form input[type="file"] {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 1rem;
+} */
+
+.project-form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #ffffff; /* FIX */
+    color: #333;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.project-form input:focus {
+    outline: none;
+    border: 1px solid #efc0c0;
+    box-shadow: 0 0 6px rgba(239, 192, 192, 0.5);
+}
+
+.project-form input::placeholder {
+    color: #999;
 }
 
 .project-form button {
@@ -475,6 +496,80 @@ h2 {
 }
 
 .userActions button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   REFERENCE SECTION
+------------------------- */
+
+.referenceBox {
+    padding: 0 20px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+/* Reference Card */
+.referenceCard {
+    background-color: #fcf9f6;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 280px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.referenceCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Reference Name */
+.referenceCard h3 {
+    color: #efc0c0;
+    margin-bottom: 10px;
+}
+
+/* Email */
+.referenceCard p {
+    color: #555;
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+/* Role badge */
+.referenceRole {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #efc0c0;
+    color: white;
+    font-size: 0.85rem;
+}
+
+/* Buttons */
+.referenceActions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.referenceActions button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #efc0c0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.referenceActions button:hover {
     background-color: #ed76a3;
     transform: scale(1.05);
 }
@@ -632,6 +727,52 @@ h2 {
 }
 
 .contact-form button:hover {
+    background-color: #ed76a3;
+    transform: scale(1.05);
+}
+
+/* ------------------------
+   SERVICES FORM
+------------------------- */
+.service-form {
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #fcf9f6;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+}
+
+.service-form input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    color: #333;
+    font-size: 1rem;
+}
+
+.service-form input:focus {
+    outline: none;
+    border: 1px solid #efc0c0;
+    box-shadow: 0 0 6px rgba(239, 192, 192, 0.5);
+}
+
+.service-form button {
+    width: 160px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #efc0c0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.service-form button:hover {
     background-color: #ed76a3;
     transform: scale(1.05);
 }
