@@ -2,7 +2,7 @@ import React from 'react';
 import service01 from '../assets/service01.jpg';
 import service02 from '../assets/service02.jpg';
 import service03 from '../assets/service03.jpg';
-import RowComponent from './RowComponent';
+import RowComponent from './rowComponent';
 
 const data = [
      { imagePath: service01, 

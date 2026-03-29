@@ -2,7 +2,7 @@ import React from 'react';
 import photo01 from '../assets/project01.png'
 import photo02 from '../assets/project02.png'
 import photo03 from '../assets/project03.png'
-import RowComponent from './RowComponent';
+import RowComponent from './rowComponent';
 import { Link } from 'react-router-dom';
 
 const data = [
