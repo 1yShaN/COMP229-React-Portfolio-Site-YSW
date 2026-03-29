@@ -13,7 +13,7 @@ export default function Contact() {
   });
   const [editId, setEditId] = useState(null);
 
-  const API_URL = "http://localhost:3000/api/contact";
+  const API_URL = "https://jenix-expressapp.onrender.com/api/contact";
 
   // Fetch contacts from backend on mount
   useEffect(() => {
