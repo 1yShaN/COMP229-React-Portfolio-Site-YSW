@@ -14,7 +14,7 @@ export default function reference() {
     const [formreference, setFormreference] = useState({ name: "", email: "", role: "" });
     const [editId, setEditId] = useState(null);
 
-    const API_URL = "http://localhost:3000/api/references";
+    const API_URL = "https://jenix-expressapp.onrender.com/api/references";
 
     // Fetch backend references from MongoDB
     useEffect(() => {

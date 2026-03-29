@@ -13,7 +13,7 @@ export default function User() {
     const [formUser, setFormUser] = useState({ name: "", email: "", role: "" });
     const [editId, setEditId] = useState(null);
 
-    const API_URL = "http://localhost:3000/api/users";
+    const API_URL = "https://jenix-expressapp.onrender.com/api/users";
 
     // Fetch backend users from MongoDB
     useEffect(() => {
