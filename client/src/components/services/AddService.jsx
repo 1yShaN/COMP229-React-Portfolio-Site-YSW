@@ -38,7 +38,7 @@ const AddService = () => {
 
     return (
         <div className="page">
-            <h1>Add Service</h1>
+            <h2 className="ListTitle">Add Service</h2>
 
             <ServiceForm
                 service={Service}

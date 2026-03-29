@@ -39,7 +39,7 @@ const AddProject = () => {
 
     return (
         <div className="page">
-            <h2>Add Project</h2>
+            <h2 className="ListTitle">Add Project</h2>
 
             <ProjectForm
                 project={project}
