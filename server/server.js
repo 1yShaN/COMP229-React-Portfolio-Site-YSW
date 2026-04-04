@@ -1,11 +1,11 @@
 
 let configDB = require('./config/mongodb');
-let firebase = require('./config/firebase');
+// let firebase = require('./config/firebase');
 let app = require('./config/express');
 let http = require('http');
 
 configDB().catch(console.dir);
-firebase();
+// firebase();
 var server = http.createServer(app);
 
 server.on('listening', onListening);
