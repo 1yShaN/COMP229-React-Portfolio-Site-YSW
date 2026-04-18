@@ -1,0 +1,176 @@
+{
+    "title": "SignIn",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 1123,
+            "height": 729,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "http://localhost:5173/signin",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "http://localhost:5173/signin",
+                    "title": "Vite + React"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Email"
+                ],
+                [
+                    "input[type='email']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/input[type='email']"
+                ]
+            ],
+            "offsetY": 29.61248779296875,
+            "offsetX": 306.3999938964844
+        },
+        {
+            "type": "change",
+            "value": "joan@",
+            "selectors": [
+                [
+                    "aria/Email"
+                ],
+                [
+                    "input[type='email']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/input[type='email']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyUp",
+            "key": "2",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "joan@smith.ca",
+            "selectors": [
+                [
+                    "aria/Email"
+                ],
+                [
+                    "input[type='email']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/input[type='email']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Password"
+                ],
+                [
+                    "input[type='password']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[2]"
+                ],
+                [
+                    "pierce/input[type='password']"
+                ]
+            ],
+            "offsetY": 11.412506103515625,
+            "offsetX": 346.3999938964844
+        },
+        {
+            "type": "change",
+            "value": "S",
+            "selectors": [
+                [
+                    "aria/Password"
+                ],
+                [
+                    "input[type='password']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[2]"
+                ],
+                [
+                    "pierce/input[type='password']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "s",
+            "target": "main"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "Smith123!",
+            "selectors": [
+                [
+                    "aria/Password"
+                ],
+                [
+                    "input[type='password']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[2]"
+                ],
+                [
+                    "pierce/input[type='password']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyUp",
+            "key": "1",
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "Enter"
+        },
+        {
+            "type": "keyUp",
+            "key": "Enter",
+            "target": "main"
+        }
+    ]
+}

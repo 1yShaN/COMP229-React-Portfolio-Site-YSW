@@ -1,0 +1,310 @@
+{
+    "title": "AddProject",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 1108,
+            "height": 729,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "http://localhost:5173/projects/list",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "http://localhost:5173/projects/list",
+                    "title": "Vite + React"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Add Project[role=\"button\"]"
+                ],
+                [
+                    "#root > div > div > div button"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/a/button"
+                ],
+                [
+                    "pierce/#root > div > div > div button"
+                ]
+            ],
+            "offsetY": 11.517501831054688,
+            "offsetX": 13.66015625
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Enter project title"
+                ],
+                [
+                    "html > body > #root > div > div > form > input[type='text']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/html > body > #root > div > div > form > input[type='text']"
+                ]
+            ],
+            "offsetY": 25.262496948242188,
+            "offsetX": 334
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "N",
+            "selectors": [
+                [
+                    "aria/Enter project title"
+                ],
+                [
+                    "html > body > #root > div > div > form > input[type='text']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/html > body > #root > div > div > form > input[type='text']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "New ",
+            "selectors": [
+                [
+                    "aria/Enter project title"
+                ],
+                [
+                    "html > body > #root > div > div > form > input[type='text']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/html > body > #root > div > div > form > input[type='text']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "New P",
+            "selectors": [
+                [
+                    "aria/Enter project title"
+                ],
+                [
+                    "html > body > #root > div > div > form > input[type='text']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/html > body > #root > div > div > form > input[type='text']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "p",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "New Pr",
+            "selectors": [
+                [
+                    "aria/Enter project title"
+                ],
+                [
+                    "html > body > #root > div > div > form > input[type='text']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/html > body > #root > div > div > form > input[type='text']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "New Project",
+            "selectors": [
+                [
+                    "aria/Enter project title"
+                ],
+                [
+                    "html > body > #root > div > div > form > input[type='text']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/html > body > #root > div > div > form > input[type='text']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "input[type='date']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/input[2]"
+                ],
+                [
+                    "pierce/input[type='date']"
+                ]
+            ],
+            "offsetY": 28.262481689453125,
+            "offsetX": 793
+        },
+        {
+            "type": "change",
+            "value": "2026-04-17",
+            "selectors": [
+                [
+                    "input[type='date']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/input[2]"
+                ],
+                [
+                    "pierce/input[type='date']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Enter project description"
+                ],
+                [
+                    "textarea"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/textarea"
+                ],
+                [
+                    "pierce/textarea"
+                ]
+            ],
+            "offsetY": 39.262481689453125,
+            "offsetX": 284
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "New project added",
+            "selectors": [
+                [
+                    "aria/Enter project description"
+                ],
+                [
+                    "textarea"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/textarea"
+                ],
+                [
+                    "pierce/textarea"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Save"
+                ],
+                [
+                    "#root > div > div button:nth-of-type(1)"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/form/div/button[1]"
+                ],
+                [
+                    "pierce/#root > div > div button:nth-of-type(1)"
+                ],
+                [
+                    "text/Save"
+                ]
+            ],
+            "offsetY": 26.76251220703125,
+            "offsetX": 101
+        }
+    ]
+}

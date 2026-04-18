@@ -1,0 +1,86 @@
+{
+    "title": "SignOut",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 1108,
+            "height": 729,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "http://localhost:5173/projects/list",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "http://localhost:5173/projects/list",
+                    "title": "Vite + React"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Log Out"
+                ],
+                [
+                    "nav button"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/nav/div[2]/button"
+                ],
+                [
+                    "pierce/nav button"
+                ],
+                [
+                    "text/Log Out"
+                ]
+            ],
+            "offsetY": 14.327999114990234,
+            "offsetX": 53.9139404296875
+        },
+        {
+            "type": "change",
+            "value": "joan@smith.ca",
+            "selectors": [
+                [
+                    "aria/Email"
+                ],
+                [
+                    "input[type='email']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/input[type='email']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "123456",
+            "selectors": [
+                [
+                    "aria/Password"
+                ],
+                [
+                    "input[type='password']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[2]"
+                ],
+                [
+                    "pierce/input[type='password']"
+                ]
+            ],
+            "target": "main"
+        }
+    ]
+}

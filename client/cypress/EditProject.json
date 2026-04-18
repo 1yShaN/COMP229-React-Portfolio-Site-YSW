@@ -1,0 +1,302 @@
+{
+    "title": "EditProject",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 1108,
+            "height": 729,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "http://localhost:5173/projects/list",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "http://localhost:5173/projects/list",
+                    "title": "Vite + React"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "tr:nth-of-type(5) button:nth-of-type(1)"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[4]/button[1]"
+                ],
+                [
+                    "pierce/tr:nth-of-type(5) button:nth-of-type(1)"
+                ]
+            ],
+            "offsetY": 19.11248779296875,
+            "offsetX": 26.3543701171875
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/New project added",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "textarea"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[3]/textarea"
+                ],
+                [
+                    "pierce/textarea"
+                ],
+                [
+                    "text/New project added"
+                ]
+            ],
+            "offsetY": 12.98748779296875,
+            "offsetX": 31.337493896484375
+        },
+        {
+            "type": "change",
+            "value": " project added",
+            "selectors": [
+                [
+                    "aria/New project added",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "textarea"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[3]/textarea"
+                ],
+                [
+                    "pierce/textarea"
+                ],
+                [
+                    "text/New project added"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "E project added",
+            "selectors": [
+                [
+                    "aria/New project added",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "textarea"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[3]/textarea"
+                ],
+                [
+                    "pierce/textarea"
+                ],
+                [
+                    "text/New project added"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "e",
+            "target": "main"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "Edited project added",
+            "selectors": [
+                [
+                    "aria/New project added",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "textarea"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[3]/textarea"
+                ],
+                [
+                    "pierce/textarea"
+                ],
+                [
+                    "text/New project added"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/New Project",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "td:nth-of-type(1) > input"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[1]/input"
+                ],
+                [
+                    "pierce/td:nth-of-type(1) > input"
+                ],
+                [
+                    "text/New Project"
+                ]
+            ],
+            "offsetY": 16.51251220703125,
+            "offsetX": 38
+        },
+        {
+            "type": "change",
+            "value": "E Project",
+            "selectors": [
+                [
+                    "aria/New Project",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "td:nth-of-type(1) > input"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[1]/input"
+                ],
+                [
+                    "pierce/td:nth-of-type(1) > input"
+                ],
+                [
+                    "text/New Project"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "Edited Project",
+            "selectors": [
+                [
+                    "aria/New Project",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "td:nth-of-type(1) > input"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[1]/input"
+                ],
+                [
+                    "pierce/td:nth-of-type(1) > input"
+                ],
+                [
+                    "text/New Project"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "td:nth-of-type(2) > input"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[2]/input"
+                ],
+                [
+                    "pierce/td:nth-of-type(2) > input"
+                ],
+                [
+                    "text/2026-04-17"
+                ]
+            ],
+            "offsetY": 18.51251220703125,
+            "offsetX": 139.53749084472656
+        },
+        {
+            "type": "change",
+            "value": "2026-04-13",
+            "selectors": [
+                [
+                    "td:nth-of-type(2) > input"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[2]/input"
+                ],
+                [
+                    "pierce/td:nth-of-type(2) > input"
+                ],
+                [
+                    "text/2026-04-17"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Save"
+                ],
+                [
+                    "tr:nth-of-type(5) button:nth-of-type(1)"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/table/tbody/tr[5]/td[4]/button[1]"
+                ],
+                [
+                    "pierce/tr:nth-of-type(5) button:nth-of-type(1)"
+                ],
+                [
+                    "text/Save"
+                ]
+            ],
+            "offsetY": 25.8125,
+            "offsetX": 30.59783935546875
+        }
+    ]
+}

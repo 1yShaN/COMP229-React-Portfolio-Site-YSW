@@ -1,0 +1,274 @@
+{
+    "title": "SignUp",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 1108,
+            "height": 729,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "http://localhost:5173/signup",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "http://localhost:5173/signup",
+                    "title": "Vite + React"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Full Name"
+                ],
+                [
+                    "input[type='text']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/input[type='text']"
+                ]
+            ],
+            "offsetY": 31.3125,
+            "offsetX": 269
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "J",
+            "selectors": [
+                [
+                    "aria/Full Name"
+                ],
+                [
+                    "input[type='text']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/input[type='text']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "Joan S",
+            "selectors": [
+                [
+                    "aria/Full Name"
+                ],
+                [
+                    "input[type='text']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/input[type='text']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyDown",
+            "target": "main",
+            "key": "CapsLock"
+        },
+        {
+            "type": "keyUp",
+            "key": "s",
+            "target": "main"
+        },
+        {
+            "type": "keyUp",
+            "key": "CapsLock",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "Joan Smith",
+            "selectors": [
+                [
+                    "aria/Full Name"
+                ],
+                [
+                    "input[type='text']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[1]"
+                ],
+                [
+                    "pierce/input[type='text']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Email"
+                ],
+                [
+                    "input[type='email']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[2]"
+                ],
+                [
+                    "pierce/input[type='email']"
+                ]
+            ],
+            "offsetY": 27.11248779296875,
+            "offsetX": 230
+        },
+        {
+            "type": "change",
+            "value": "joan@smith.ca",
+            "selectors": [
+                [
+                    "aria/Email"
+                ],
+                [
+                    "input[type='email']"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[2]"
+                ],
+                [
+                    "pierce/input[type='email']"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Password"
+                ],
+                [
+                    "input:nth-of-type(3)"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[3]"
+                ],
+                [
+                    "pierce/input:nth-of-type(3)"
+                ]
+            ],
+            "offsetY": 15.11248779296875,
+            "offsetX": 394
+        },
+        {
+            "type": "change",
+            "value": "123456",
+            "selectors": [
+                [
+                    "aria/Password"
+                ],
+                [
+                    "input:nth-of-type(3)"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[3]"
+                ],
+                [
+                    "pierce/input:nth-of-type(3)"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Confirm Password"
+                ],
+                [
+                    "input:nth-of-type(4)"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[4]"
+                ],
+                [
+                    "pierce/input:nth-of-type(4)"
+                ]
+            ],
+            "offsetY": 23.9124755859375,
+            "offsetX": 304
+        },
+        {
+            "type": "change",
+            "value": "123456",
+            "selectors": [
+                [
+                    "aria/Confirm Password"
+                ],
+                [
+                    "input:nth-of-type(4)"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/input[4]"
+                ],
+                [
+                    "pierce/input:nth-of-type(4)"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "aria/Sign Up[role=\"button\"]"
+                ],
+                [
+                    "button"
+                ],
+                [
+                    "xpath///*[@id=\"root\"]/div/div/div/form/button"
+                ],
+                [
+                    "pierce/button"
+                ]
+            ],
+            "offsetY": 24.16851806640625,
+            "offsetX": 262
+        }
+    ]
+}
