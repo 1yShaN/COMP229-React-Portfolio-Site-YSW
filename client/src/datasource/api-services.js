@@ -1,6 +1,23 @@
 
+import { getToken } from '../components/auth/auth-helper';
+
 let apiURL = import.meta.env.VITE_APP_APIURL;
 let endpoint = "/api/services/";
+
+const buildHeaders = (includeContentType = false) => {
+    const headers = {};
+
+    if (includeContentType) {
+        headers['Content-Type'] = 'application/json';
+    }
+
+    const token = getToken();
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
+    }
+
+    return headers;
+};
 
 // GET ALL
 const list = async () => {
@@ -18,9 +35,7 @@ const create = async (service) => {
     try {
         const response = await fetch(`${apiURL}${endpoint}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: buildHeaders(true),
             body: JSON.stringify(service)
         });
         return await response.json();
@@ -34,7 +49,8 @@ const create = async (service) => {
 const remove = async (id) => {
     try {
         const response = await fetch(`${apiURL}${endpoint}${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: buildHeaders()
         });
         return await response.json();
     } catch (error) {
@@ -48,9 +64,7 @@ const update = async (service, id) => {
     try {
         const response = await fetch(`${apiURL}${endpoint}${id}`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: buildHeaders(true),
             body: JSON.stringify(service)
         });
         return await response.json();

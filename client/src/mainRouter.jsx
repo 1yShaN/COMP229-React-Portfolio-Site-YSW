@@ -15,6 +15,9 @@ import EditProject from './components/projects/EditProject';
 import ListService from './components/services/ListService';
 import AddService from './components/services/AddService'
 import EditService from './components/services/EditService';
+import SignIn from './components/auth/SignIn';
+import SignUp from './components/auth/SignUp';
+import PrivateRoute from './components/auth/PrivateRoute';
 
 const MainRouter = () => {
     return (
@@ -26,12 +29,42 @@ const MainRouter = () => {
                 <Route exact path="/about" element={<About />} />
                 <Route path="/projects" element={<Project />} />
                 <Route path="/projects/list" element={<ListProject />} />
-                <Route path="/projects/add" element={<AddProject />} />
-                <Route path="/projects/edit/:id" element={<EditProject />} />
+                <Route
+                    path="/projects/add"
+                    element={
+                        <PrivateRoute adminOnly>
+                            <AddProject />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/projects/edit/:id"
+                    element={
+                        <PrivateRoute adminOnly>
+                            <EditProject />
+                        </PrivateRoute>
+                    }
+                />
                 <Route exact path="/services" element={<Services />} />
                 <Route path="/services/list" element={<ListService />} />
-                <Route path="/services/add" element={<AddService />} />
-                <Route path="/services/edit/:id" element={<EditService />} />
+                <Route
+                    path="/services/add"
+                    element={
+                        <PrivateRoute adminOnly>
+                            <AddService />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/services/edit/:id"
+                    element={
+                        <PrivateRoute adminOnly>
+                            <EditService />
+                        </PrivateRoute>
+                    }
+                />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
                 <Route exact path="/users" element={<User />} />
                 <Route exact path="/references" element={<References />} />
                 <Route exact path="/contact" element={<Contact />} />
