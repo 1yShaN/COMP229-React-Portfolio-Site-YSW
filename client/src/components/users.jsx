@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { getToken, isAuthenticated } from "./auth/auth-helper";
 
 export default function User() {
 
@@ -12,8 +13,15 @@ export default function User() {
     const [backendUsers, setBackendUsers] = useState([]);
     const [formUser, setFormUser] = useState({ name: "", email: "", role: "" });
     const [editId, setEditId] = useState(null);
+    const authenticated = isAuthenticated();
 
-    const API_URL = "https://jenix-expressapp.onrender.com/api/users";
+    const API_URL = `${import.meta.env.VITE_APP_APIURL}/api/users`;
+
+    const authConfig = () => ({
+        headers: {
+            Authorization: `Bearer ${getToken()}`
+        }
+    });
 
     // Fetch backend users from MongoDB
     useEffect(() => {
@@ -42,7 +50,12 @@ export default function User() {
 
         try {
             if (editId) {
-                await axios.put(`${API_URL}/${editId}`, formUser);
+                if (!authenticated) {
+                    alert("Please sign in to update users.");
+                    return;
+                }
+
+                await axios.put(`${API_URL}/${editId}`, formUser, authConfig());
             } else {
                 await axios.post(API_URL, formUser);
             }
@@ -66,8 +79,14 @@ export default function User() {
             alert("Cannot delete default user");
             return;
         }
+
+        if (!authenticated) {
+            alert("Please sign in to delete users.");
+            return;
+        }
+
         try {
-            await axios.delete(`${API_URL}/${id}`);
+            await axios.delete(`${API_URL}/${id}`, authConfig());
             fetchUsers();
         } catch (error) {
             console.error("Error deleting user:", error);
@@ -120,7 +139,7 @@ export default function User() {
 
                         <span className="userRole">{user.role}</span>
 
-                        {user.id && (
+                        {user.id && authenticated && (
                             <div className="userActions">
                                 <button onClick={() => handleEdit(user)}>Edit</button>
 

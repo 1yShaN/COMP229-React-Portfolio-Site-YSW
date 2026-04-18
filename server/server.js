@@ -2,18 +2,10 @@
 let configDB = require('./config/mongodb');
 // let firebase = require('./config/firebase');
 let app = require('./config/express');
-let http = require('http');
+const PORT = process.env.PORT || 5000;
 
 configDB().catch(console.dir);
 // firebase();
-var server = http.createServer(app);
-
-server.on('listening', onListening);
-server.listen(3000);
-
-function onListening() {
-    console.log('Server running at http://localhost:3000/');
-}
 
 function helloWorld(req, res, next){
     res.setHeader('Content-Type', 'text/plain');
@@ -45,7 +37,7 @@ app.get('/hello', helloWorld);
 app.get('/bye', goodbye);
 app.use(notfound);
 
-app.listen(3000, ()=>{
-    console.log('Server running at http://localhost:3000/');
+app.listen(PORT, ()=>{
+    console.log(`Server running at http://localhost:${PORT}/`);
 })
 

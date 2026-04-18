@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { list, create, update, remove } from "../../datasource/api-projects";
 import { data } from "../project";
 import { Link } from "react-router-dom";
+import { isAdmin } from "../auth/auth-helper";
 
 const ListProject = () => {
+    const admin = isAdmin();
     const [projects, setProjects] = useState([]);
     const [editId, setEditId] = useState(null);
     const [editData, setEditData] = useState({
@@ -17,7 +19,7 @@ const ListProject = () => {
         const res = await list();
 
         if (res && res.success) {
-            if (res.data.length === 0) {
+            if (res.data.length === 0 && admin) {
                 for (let item of data) {
                     await create({
                         title:
@@ -74,11 +76,13 @@ const ListProject = () => {
         <div className="page">
             <h2 className="ListTitle">Project List</h2>
 
-            <div className="table-actions">
-                <Link to="/projects/add">
-                    <button className="add-btn">Add Project</button>
-                </Link>
-            </div>
+            {admin && (
+                <div className="table-actions">
+                    <Link to="/projects/add">
+                        <button className="add-btn">Add Project</button>
+                    </Link>
+                </div>
+            )}
 
             <table className="projectTable">
                 <thead>
@@ -86,7 +90,7 @@ const ListProject = () => {
                         <th>Title</th>
                         <th>Completion</th>
                         <th>Description</th>
-                        <th>Actions</th>
+                        <th>{admin ? "Actions" : "Access"}</th>
                     </tr>
                 </thead>
 
@@ -112,15 +116,21 @@ const ListProject = () => {
                             </td>
 
                             <td>
-                                {editId === p.id ? (
-                                    <button onClick={() => handleSave(p.id)}>Save</button>
+                                {!admin ? (
+                                    <span>Admin only</span>
                                 ) : (
-                                    <button onClick={() => handleEdit(p)}>Edit</button>
-                                )}
+                                    <>
+                                        {editId === p.id ? (
+                                            <button onClick={() => handleSave(p.id)}>Save</button>
+                                        ) : (
+                                            <button onClick={() => handleEdit(p)}>Edit</button>
+                                        )}
 
-                                <button onClick={() => handleDelete(p.id)}>
-                                    Delete
-                                </button>
+                                        <button onClick={() => handleDelete(p.id)}>
+                                            Delete
+                                        </button>
+                                    </>
+                                )}
                             </td>
                         </tr>
                     ))}

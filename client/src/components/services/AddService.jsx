@@ -30,7 +30,7 @@ const AddService = () => {
             alert("Service added successfully!");
 
             // redirect to list --> will auto reload data
-            navigate("/Services/list");
+            navigate("/services/list");
         } else {
             alert(res?.message || "Failed to add Service");
         }

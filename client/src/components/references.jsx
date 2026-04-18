@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { getToken, isAdmin } from "./auth/auth-helper";
 
 export default function reference() {
 
@@ -13,8 +14,15 @@ export default function reference() {
     const [backendreferences, setBackendreferences] = useState([]);
     const [formreference, setFormreference] = useState({ name: "", email: "", role: "" });
     const [editId, setEditId] = useState(null);
+    const admin = isAdmin();
 
-    const API_URL = "https://jenix-expressapp.onrender.com/api/references";
+    const API_URL = `${import.meta.env.VITE_APP_APIURL}/api/references`;
+
+    const authConfig = () => ({
+        headers: {
+            Authorization: `Bearer ${getToken()}`
+        }
+    });
 
     // Fetch backend references from MongoDB
     useEffect(() => {
@@ -41,11 +49,16 @@ export default function reference() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!admin) {
+            alert("Only admin users can add or edit references.");
+            return;
+        }
+
         try {
             if (editId) {
-                await axios.put(`${API_URL}/${editId}`, formreference);
+                await axios.put(`${API_URL}/${editId}`, formreference, authConfig());
             } else {
-                await axios.post(API_URL, formreference);
+                await axios.post(API_URL, formreference, authConfig());
             }
             setFormreference({ name: "", email: "", role: "" });
             setEditId(null);
@@ -67,8 +80,14 @@ export default function reference() {
             alert("Cannot delete default reference");
             return;
         }
+
+        if (!admin) {
+            alert("Only admin users can delete references.");
+            return;
+        }
+
         try {
-            await axios.delete(`${API_URL}/${id}`);
+            await axios.delete(`${API_URL}/${id}`, authConfig());
             fetchreferences();
         } catch (error) {
             console.error("Error deleting reference:", error);
@@ -83,33 +102,37 @@ export default function reference() {
             <h2>References</h2>
 
             {/* FORM */}
-            <form onSubmit={handleSubmit} className="project-form">
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    value={formreference.name}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={formreference.email}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="text"
-                    name="role"
-                    placeholder="Role"
-                    value={formreference.role}
-                    onChange={handleChange}
-                    required
-                />
-                <button type="submit">{editId ? "Update" : "Add"} reference</button>
-            </form>
+            {admin ? (
+                <form onSubmit={handleSubmit} className="project-form">
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Full Name"
+                        value={formreference.name}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={formreference.email}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        type="text"
+                        name="role"
+                        placeholder="Role"
+                        value={formreference.role}
+                        onChange={handleChange}
+                        required
+                    />
+                    <button type="submit">{editId ? "Update" : "Add"} reference</button>
+                </form>
+            ) : (
+                <p className="auth-footer">Only admin users can add, edit, or delete references.</p>
+            )}
 
             {/* referenceS LIST */}
             <div className="referenceBox">
@@ -120,7 +143,7 @@ export default function reference() {
                         <p>{reference.email}</p>
                         <p className="referenceRole">{reference.role}</p>
 
-                        {backendreferences.includes(reference) && (
+                        {admin && backendreferences.includes(reference) && (
                             <div className="referenceActions">
                                 <button onClick={() => handleEdit(reference)}>Edit</button>
 
